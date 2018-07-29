@@ -89,4 +89,20 @@ class QuestionController extends Controller
         else
             return response()->json(['message' => 'fail to delete the record'], 500);
     }
+
+    public function voteUpdate (Request $request, string $id)
+    {
+        $q = Question::find($id);
+        if (is_null($q))
+            return response()->json(['message' => 'record is not found'], 404);
+
+        if (abs($request->vote) !== 1)
+            return response()->json(['message' => 'value of vote parameter must be either 1 or -1'], 400);
+        $q->Vote += $request->vote;
+        
+        if($q->save())
+            return response()->json(new QuestionResource($q), 200);
+        else
+            return response()->json(['message' => 'fail to update the record'], 500);
+    }
 }

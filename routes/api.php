@@ -22,3 +22,4 @@ Route::post('questions', 'QuestionController@store')->name('questions.store');
 Route::get('questions/{id}', 'QuestionController@show')->name('questions.show');
 Route::put('questions/{id}', 'QuestionController@update')->name('questions.update');
 Route::delete('questions/{id}', 'QuestionController@destroy')->name('questions.destroy');
+Route::post('questions/{id}/vote', 'QuestionController@voteUpdate')->name('questions.voteUpdate');
